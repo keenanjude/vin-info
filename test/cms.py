@@ -120,15 +120,15 @@ else:
     f = open((path+vin+".csv"), 'a')
     
     print("would you like to update your service record? (Y/N)\n")
-    choice = input()
+    choice = input().upper()
     if choice == "Y":
         nowtime = datetime.now()
         TIMESTAMP = nowtime.strftime("%m/%d/%Y")
-        TIME_WORK_DONE = input('input the date/time work was done\n')
-        MILEAGE_AT_INTERVAL_KM = input('Enter the odometer readout in Kilometers\n')
-        TYPE_OF_WORK_DONE = input('Enter the general code for work done\n')
-        WORK_DONE_DESC = input('Enter the description for work done on vehicle\n')
-        LOCATION_INFO = input('Enter any location info of where the work was completed\n')
+        TIME_WORK_DONE = input('input the date work was done\n').upper()
+        MILEAGE_AT_INTERVAL_KM = input('Enter the odometer readout in Kilometers\n').upper()
+        TYPE_OF_WORK_DONE = input('Enter the general code for work done\n').upper()
+        WORK_DONE_DESC = input('Enter the description for work done on vehicle\n').upper()
+        LOCATION_INFO = input('Enter any location info of where the work was completed\n').upper()
         service = [TIMESTAMP,",",TIME_WORK_DONE,",",MILEAGE_AT_INTERVAL_KM,",",TYPE_OF_WORK_DONE,",",WORK_DONE_DESC,",",LOCATION_INFO]
         f.writelines(service)
 
