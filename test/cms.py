@@ -4,6 +4,7 @@
 
 import csv
 import os
+from datetime import datetime
 
 
 test_mode = True #MUST BE TRUE OR FALSE
@@ -96,7 +97,7 @@ if not os.path.exists(path):
         f.write(i + "," + head_info[n] + "\n")
         n += 1
         #print(n)
-    headder = ["TIMESTAMP,","TIME_WORK_DONE,","TYPE_OF_WORK_DONE,","WORK_DONE_DESC,", "LOCATION_INFO","\n"]
+    headder = ["TIMESTAMP,","TIME_WORK_DONE,","MILEAGE_AT_INTERVAL_KM,","TYPE_OF_WORK_DONE,","WORK_DONE_DESC,", "LOCATION_INFO","\n"]
     f.writelines(headder)
     print("A new vehicle has been added! Please restart the program")
 
@@ -115,7 +116,28 @@ else:
             last_line = line
             print(last_line)
             break
-        
+
+    f = open((path+vin+".csv"), 'a')
+    
+    print("would you like to update your service record? (Y/N)\n")
+    choice = input()
+    if choice == "Y":
+        nowtime = datetime.now()
+        TIMESTAMP = nowtime.strftime("%m/%d/%Y")
+        TIME_WORK_DONE = input('input the date/time work was done\n')
+        MILEAGE_AT_INTERVAL_KM = input('Enter the odometer readout in Kilometers\n')
+        TYPE_OF_WORK_DONE = input('Enter the general code for work done\n')
+        WORK_DONE_DESC = input('Enter the description for work done on vehicle\n')
+        LOCATION_INFO = input('Enter any location info of where the work was completed\n')
+        service = [TIMESTAMP,",",TIME_WORK_DONE,",",MILEAGE_AT_INTERVAL_KM,",",TYPE_OF_WORK_DONE,",",WORK_DONE_DESC,",",LOCATION_INFO]
+        f.writelines(service)
+
+    else:
+        f.close()
+
+
+
+
 
 f.close()
 
